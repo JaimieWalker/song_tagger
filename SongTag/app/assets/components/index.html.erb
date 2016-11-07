@@ -1,0 +1,9 @@
+<div >
+	<ol>
+		<li ng-repeat="song in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{song.name}}</li>
+	</ol>
+	View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+    
+    <div uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage" max-size="maxSize" num-pages="numPages"></div>
+    <pre>Page: {{currentPage}} / {{numPages}}</pre>
+</div>
