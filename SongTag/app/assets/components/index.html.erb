@@ -13,7 +13,7 @@
 <a href="/new"> <button>Create a Song</button></a></p>
 <p ng-show="songs.length === 0">No Results Found.</p>
 	<ol>
-		<li class="list-unstyled" ng-repeat="result in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{songs.indexOf(result) + 1}}. <p><pre><button>Edit</button> <button>Delete</button></pre>Song: {{result.song}} | Tags: {{result.tags}}</p></li>
+		<li class="list-unstyled" ng-repeat="result in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{songs.indexOf(result) + 1}}. Song: {{result.song}} | Tags: {{result.tags}}</p><p><pre><button>Edit</button> <button>Delete</button></pre></li>
 	</ol>
 	<div ng-show="songs && songs.length != 0">
 		View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
