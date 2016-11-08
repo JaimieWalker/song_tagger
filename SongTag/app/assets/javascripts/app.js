@@ -9,5 +9,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 			templateUrl: "index.html",
 			controller: "indexCtrl"
 		})
+		.state("new",{
+			url: '/new',
+			templateUrl: "new.html",
+			controller: "newCtrl"
+		})
 
 })

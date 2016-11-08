@@ -1,0 +1,13 @@
+<a href="/">Back to main page</a>
+<form name="songForm" ng-submit="submit()">
+		<div ng-hide= "songQuery && tagQuery || tagQuery"> Enter 3 or more characters for either field</div>
+		<span>Song:</span>
+		<input required ng-keyup="check()" ng-keydown="numsAndDigits_song($event)" type="text" name="Song" placeholder= "Search by songs" ng-minlength="3" ng-model="songQuery" ng-trim="true">
+		<div ng-show="tagQuery">Separate multiple tags using commas ','</div>
+		<span>Tag:</span>
+		<input required ng-keyup="check()" ng-keydown="numsAndDigits_tag($event)" ng-model= "tagQuery" type="text" name="tags" placeholder="Search by tags" ng-minlength="3" ng-trim="true">
+		<input type="submit" name="Create Song">
+</form>
+		<p ng-show= "songs.length > 0">That Song already exists, would you like to edit it?
+			 <pre ng-repeat="result in songs"><button>Edit</button><button>Delete</button> Song: {{result.song}} | Tags: {{result.tags}}</pre>
+		 </p>

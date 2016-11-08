@@ -1,9 +1,24 @@
-<div >
+<div>
+	<form name="songForm">
+		<div ng-hide= "songQuery && tagQuery || tagQuery"> Enter 3 or more characters for either field</div>
+		<span>Song:</span>
+		<input ng-keyup="search()" ng-keydown="numsAndDigits_song($event)" type="text" name="Song" placeholder= "Search by songs" ng-minlength="3" ng-model="songQuery" ng-trim="true">
+		<div ng-show="tagQuery">Separate multiple tags using commas ','</div>
+		<span>Tag:</span>
+		<input ng-keyup="search()" ng-keydown="numsAndDigits_tag($event)" ng-model= "tagQuery" type="text" name="tags" placeholder="Search by tags" ng-minlength="3" ng-trim="true">
+	</form>
+<p ng-hide="songs">Loading...</p>
+<br>
+<p>Would you like to create a song?<br>
+<a href="/new"> <button>Create a Song</button></a></p>
+<p ng-show="songs.length === 0">No Results Found.</p>
 	<ol>
-		<li ng-repeat="song in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{song.name}}</li>
+		<li class="list-unstyled" ng-repeat="result in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{songs.indexOf(result) + 1}}. <p><pre><button>Edit</button> <button>Delete</button></pre>Song: {{result.song}} | Tags: {{result.tags}}</p></li>
 	</ol>
-	View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+	<div ng-show="songs && songs.length != 0">
+		View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+	</div>
     
-    <div uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage" max-size="maxSize" num-pages="numPages"></div>
-    <pre>Page: {{currentPage}} / {{numPages}}</pre>
+    <div ng-show="songs && songs.length != 0" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage" max-size="maxSize" num-pages="numPages"></div>
+    <pre ng-show="songs && songs.length != 0">Page: {{currentPage}} / {{numPages}}</pre>
 </div>
