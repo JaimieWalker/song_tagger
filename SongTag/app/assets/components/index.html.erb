@@ -14,8 +14,8 @@
 <p ng-show="songs.length === 0">No Results Found.</p>
 <div class="row">
   <div class="col-xs-6">
-              <!-- <li ng-repeat='item in songs' ng-show="item.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="songs" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.title}}</li> -->
-  	<ol ng-repeat="result in sliced()" data-drag="true" data-jqyoui-options="{helper: 'clone', revert: 'invalid',placeholder:keep,index:{{$index}}}" ng-model="songs" jqyoui-draggable="{animate:true,onDrop:before($index)}">
+              <!-- <li ng-repeat='item in songs' ng-show="item.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="songs" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: ''keep''}">{{item.title}}</li> -->
+  	<ol ng-repeat="result in sliced()" data-drag="true" data-jqyoui-options="{helper: 'clone', revert: 'invalid',placeholder:'keep',index:{{$index}}}" ng-model="songs" jqyoui-draggable="{animate:true,onDrop:before($index)}">
 				<li class="list-unstyled" >{{songs.indexOf(result) + 1}}. Song: {{result.song}} | Tags: {{result.tags}}
 					<div>
 							<button class="btn-info">Edit</button> 
@@ -28,7 +28,7 @@
  
  <span><button ng-click="download()">Export</button></span>
 <ol class="thumbnail col-xs-6" data-drop="true" ng-model="export" jqyoui-droppable="{stack:true}" style='height:100vh;'>
-  <li data-jqyoui-options="{revert: 'invalid', helper: 'clone',placeholder:keep}" ng-click="remove($event,$index)" ng-repeat="result in export track by $index" ng-hide="!result.song">Song: {{result.song}} | Tags: {{result.tags}}</li>
+  <li data-jqyoui-options="{revert: 'invalid', helper: 'clone',placeholder:'keep'}" ng-click="remove($event,$index)" ng-repeat="result in export track by $index" ng-hide="!result.song">Song: {{result.song}} | Tags: {{result.tags}}</li>
 </ol>
 
 
