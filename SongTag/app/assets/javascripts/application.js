@@ -17,5 +17,6 @@
 //= require angular-rails-templates
 //= require angular-animate
 //= require app
+//= require dragAndDrop.js
 //= require_tree ../components
 //= require_tree .

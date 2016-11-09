@@ -53,6 +53,22 @@ angular.module("SongTag")
 					function(error){
 						return error;
 					})
+			},
+			exportCSV : function(data){
+				return $http({
+					method: "POST",
+					url: "song/export",
+					data: data,
+					responseType: "application/csv",
+					headers:{
+						"accept" : "application/csv"
+					}
+					}).then(function(response){
+						return response;
+					},
+					function(error){
+						return error;
+					})
 			}
 
 		}

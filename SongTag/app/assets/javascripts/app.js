@@ -1,5 +1,5 @@
 var app = angular.module("SongTag",
-	["ngResource","ui.router","templates","ui.bootstrap"]);
+	["ngResource","ui.router","templates","ui.bootstrap","ngDragDrop"]);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 	$locationProvider.html5Mode(true);

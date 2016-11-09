@@ -1,4 +1,3 @@
-<div>
 	<form name="songForm">
 		<div ng-hide= "songQuery && tagQuery || tagQuery"> Enter 3 or more characters for either field</div>
 		<span>Song:</span>
@@ -10,13 +9,43 @@
 <p ng-hide="songs">Loading...</p>
 <br>
 <p>Would you like to create a song?<br>
-<a href="/new"> <button>Create a Song</button></a></p>
+	<a href="/new"> <button>Create a Song</button></a>
+</p>
 <p ng-show="songs.length === 0">No Results Found.</p>
-	<ol>
-		<li class="list-unstyled" ng-repeat="result in songs.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">{{songs.indexOf(result) + 1}}. Song: {{result.song}} | Tags: {{result.tags}}</p><p><pre><button>Edit</button> <button>Delete</button></pre></li>
+<div class="row">
+  <div class="col-xs-6">
+              <!-- <li ng-repeat='item in songs' ng-show="item.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="songs" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.title}}</li> -->
+  	<ol ng-repeat="result in sliced()" data-drag="true" data-jqyoui-options="{helper: 'clone', revert: 'invalid',placeholder:keep,index:{{$index}}}" ng-model="songs" jqyoui-draggable="{animate:true,onDrop:before($index)}">
+				<li class="list-unstyled" >{{songs.indexOf(result) + 1}}. Song: {{result.song}} | Tags: {{result.tags}}
+					<div>
+							<button class="btn-info">Edit</button> 
+							<button class="btn-danger">Delete</button>
+					</div>
+				</li>
+				<br>
 	</ol>
+ </div>
+ 
+ <span><button ng-click="download()">Export</button></span>
+<ol class="thumbnail col-xs-6" data-drop="true" ng-model="export" jqyoui-droppable="{stack:true}" style='height:100vh;'>
+  <li data-jqyoui-options="{revert: 'invalid', helper: 'clone',placeholder:keep}" ng-click="remove($event,$index)" ng-repeat="result in export track by $index" ng-hide="!result.song">Song: {{result.song}} | Tags: {{result.tags}}</li>
+</ol>
+
+
+</div>
+
+
+	
+
 	<div ng-show="songs && songs.length != 0">
-		View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+		View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+				<option>5</option>
+				<option>10</option>
+				<option>20</option>
+				<option>30</option>
+				<option>40</option>
+				<option>50</option>
+			</select> records at a time.
 	</div>
     
     <div ng-show="songs && songs.length != 0" uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage" max-size="maxSize" num-pages="numPages"></div>

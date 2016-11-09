@@ -2,6 +2,8 @@ class SongController < ApplicationController
 	skip_before_action :verify_authenticity_token
 require "pry"
 require "pry-nav"
+require 'csv'
+require 'json'
 include SongHelper
 
 	def index
@@ -52,5 +54,26 @@ include SongHelper
 		end
 		render json: create_hash(songs)
 	end
+
+	def export
+		File.delete("public/your_songs.csv") if File.exist?("public/your_songs.csv")
+		my_file = CSV.open("public/your_songs.csv", "wb") do |csv,index|
+		  csv << ["song","tags"]
+		end
+
+
+		a_file = CSV.open("public/your_songs.csv","a+") do |csv|
+			JSON.parse(request.body.read).each do |hash|
+		    	csv << hash.values
+			end			
+		end
+		send_file ("#{Rails.root}/public/your_songs.csv"), :type => "text/csv"
+	end
+
+	def show
+		send_file ("#{Rails.root}/public/your_songs.csv"), :type => "text/csv"
+	end
+
+
 
 end
