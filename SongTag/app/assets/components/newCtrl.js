@@ -12,7 +12,6 @@ var app = angular.module("SongTag")
 			}
 				
 			musicService.createSong($scope.params).then(function success(res){
-				debugger
 				$scope.songs = res.data 
 			},
 			function error(res){

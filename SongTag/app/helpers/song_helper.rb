@@ -20,7 +20,7 @@ module SongHelper
 	def create_hash(songs)
 		results = []
 		songs.each do |song|
-			results << {song: song.name, tags: song.tags.pluck(:name).join(',')}
+			results << {song: song.name, tags: song.tags.pluck(:name).join(','),song_id: song.id,tag_ids: song.tags.pluck(:id)}
 		end
 		return results
 	end

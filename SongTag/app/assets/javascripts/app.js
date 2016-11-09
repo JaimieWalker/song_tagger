@@ -14,5 +14,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 			templateUrl: "new.html",
 			controller: "newCtrl"
 		})
+		.state("edit",{
+			url: '/edit',
+			templateUrl: "edit.html",
+			controller: "editCtrl"
+		})
 
 })

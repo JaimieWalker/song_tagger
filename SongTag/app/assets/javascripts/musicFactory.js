@@ -69,6 +69,42 @@ angular.module("SongTag")
 					function(error){
 						return error;
 					})
+			},
+
+			updateSong : function(params){
+				return $http({
+					method: "GET",
+				url: "song/"+ params.song_id + "/edit",
+				params: params,
+				paramSerializer: "$httpParamSerializerJQLike",
+				responseType: "json",
+				headers: {
+						"Content-Type": "json",
+						"accept" : "application/json"
+					}
+				}).then(function(response){
+					return response;
+				},
+				function(error){
+					return error;
+				})
+			},
+			deleteSong : function(song_id){
+				return $http({
+					method: "DELETE",
+				url: "song/"+ song_id,
+				paramSerializer: "$httpParamSerializerJQLike",
+				responseType: "json",
+				headers: {
+						"Content-Type": "json",
+						"accept" : "application/json"
+					}
+				}).then(function(response){
+					return response;
+				},
+				function(error){
+					return error;
+				})
 			}
 
 		}

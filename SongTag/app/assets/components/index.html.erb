@@ -14,12 +14,11 @@
 <p ng-show="songs.length === 0">No Results Found.</p>
 <div class="row">
   <div class="col-xs-6">
-              <!-- <li ng-repeat='item in songs' ng-show="item.title" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="songs" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: ''keep''}">{{item.title}}</li> -->
   	<ol ng-repeat="result in sliced()" data-drag="true" data-jqyoui-options="{helper: 'clone', revert: 'invalid',placeholder:'keep',index:{{$index}}}" ng-model="songs" jqyoui-draggable="{animate:true,onDrop:before($index)}">
 				<li class="list-unstyled" >{{songs.indexOf(result) + 1}}. Song: {{result.song}} | Tags: {{result.tags}}
 					<div>
-							<button class="btn-info">Edit</button> 
-							<button class="btn-danger">Delete</button>
+							<a href="" ng-click="id(result)"><button class="btn-info">Edit</button></a>
+							<a href="" ng-click="delete(result)"><button class="btn-danger">Delete</button></a>
 					</div>
 				</li>
 				<br>

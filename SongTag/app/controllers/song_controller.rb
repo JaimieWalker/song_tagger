@@ -63,15 +63,32 @@ include SongHelper
 
 
 		a_file = CSV.open("public/your_songs.csv","a+") do |csv|
-			JSON.parse(request.body.read).each do |hash|
-		    	csv << hash.values
+			JSON.parse(request.body.read).compact.each do |hash|
+		    	csv << hash.values.slice(0,2)
 			end			
 		end
+
 		send_file ("#{Rails.root}/public/your_songs.csv"), :type => "text/csv"
 	end
 
 	def show
 		send_file ("#{Rails.root}/public/your_songs.csv"), :type => "text/csv"
+	end
+
+	def edit
+		song = Song.find_by(id: params["song_id"])
+		song.update(name: params["song"])
+		song.tags.clear
+		params["tags"].each do |tag_name|
+			next if tag_name.size < 3
+			tag = Tag.find_or_create_by(name: tag_name)
+			song.tags << tag
+		end
+		render json: {song: song.name, tags: song.tags.pluck(:name).join(','),song_id: song.id,tag_ids: song.tags.pluck(:id)}
+	end
+
+	def destroy
+		Song.destroy(params["id"])
 	end
 
 

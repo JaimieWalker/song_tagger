@@ -1,0 +1,12 @@
+<a href="/">Back to main page</a>
+<form name="songForm" ng-submit="submit()">
+		<div ng-hide= "song"> Enter 3 or more characters for either field</div>
+		<div ng-show="bool">That song already exists</div>
+		<span>Song:</span>
+		<pre><input required ng-keyup="check()" ng-keydown="numsAndDigits_song($event)" type="text" name="Song" ng-value="song" placeholder= "Search by songs" ng-minlength="3" ng-model="song" ng-trim="true"></pre>
+		
+		<pre ng-repeat="result in tags"><span>Tag:</span><input class="tag" required ng-keyup="check($event)" ng-keydown="numsAndDigits_tag($event)" ng-model= "result" type="text" name="tags" placeholder="Search by tags" ng-minlength="3" ng-trim="true" ng-value="result"></pre>
+		
+		<input type="submit" name="Create Song">
+</form>
+	

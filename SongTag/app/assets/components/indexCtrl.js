@@ -1,11 +1,22 @@
 var app = angular.module("SongTag")
 	.controller("indexCtrl", function($scope,musicService,$window){
+		
+		$scope.delete = function(result){
+			musicService.deleteSong(result.song_id)
+			var index = $scope.songs.indexOf(result)
+			var index2 = $scope.export.indexOf(result)
+			$scope.songs.splice(index,1)
+			$scope.export.splice(index2,1)
+		}
+
 		$scope.sliced = function(){
 			if (!$scope.songs) {
 				$scope.songs = []
 				$scope.export = []
 			}
-			return $scope.songs.slice((($scope.currentPage-1)*$scope.itemsPerPage), (($scope.currentPage)*$scope.itemsPerPage))
+			var onPage = $scope.songs.slice((($scope.currentPage-1)*$scope.itemsPerPage), (($scope.currentPage)*$scope.itemsPerPage))
+			
+			return onPage
 		}
 		$scope.remove = function(event,index){
 			$scope.export.splice(index, 1)
@@ -16,20 +27,13 @@ var app = angular.module("SongTag")
 			$scope.export.push(arr[index])
 		}
 
-		// $scope.csvSubmit = function() {
-		//   var csv = $.post('http://ip_addr:3000/api/csv', { 'input': $scope.query_box });
-		//   csv.done(function(result){
-		//     var hiddenElement = document.createElement('a');
-
-		//     hiddenElement.href = 'data:attachment/csv,' + encodeURI(result);
-		//     hiddenElement.target = '_blank';
-		//     hiddenElement.download = 'filename.csv';
-		//     hiddenElement.click();
-		//   })
-		// }
+		$scope.id = function(result){
+			localStorage.setItem("data",angular.toJson(result))
+			$window.location.href = "/edit"
+		}
 
 		$scope.download = function (){
-			if ($scope.export.length < 1) {
+			if ($scope.export.length < 1 || !$scope.export) {
 				alert("There must be at least one song to export")
 				return ""
 			}

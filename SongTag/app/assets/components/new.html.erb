@@ -8,6 +8,6 @@
 		<input required ng-keyup="check()" ng-keydown="numsAndDigits_tag($event)" ng-model= "tagQuery" type="text" name="tags" placeholder="Search by tags" ng-minlength="3" ng-trim="true">
 		<input type="submit" name="Create Song">
 </form>
-		<p ng-show= "songs.length > 0">That Song already exists, would you like to edit it?
-			 <pre ng-repeat="result in songs"><button>Edit</button><button>Delete</button> Song: {{result.song}} | Tags: {{result.tags}}</pre>
+		<p ng-show= "songs.length > 0">That Song already exists
+			 <pre ng-repeat="result in songs"> Song: {{result.song}} | Tags: {{result.tags}}</pre>
 		 </p>
